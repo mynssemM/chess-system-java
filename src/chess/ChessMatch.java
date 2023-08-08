@@ -25,14 +25,15 @@ public class ChessMatch {
     }
 
     public ChessPiece performChessMove(ChessPosition sourcePosition, ChessPosition targetPosition) {
-       Position source = sourcePosition.toPosition();
-       Position target = targetPosition.toPosition();
-       validateSourcePosition(source);
-       Piece capturedPiece = makeMove(source, target);
-       return (ChessPiece) capturedPiece;
+        Position source = sourcePosition.toPosition();
+        Position target = targetPosition.toPosition();
+        validateSourcePosition(source);
+        Piece capturedPiece = makeMove(source, target);
+        return (ChessPiece) capturedPiece;
     }
 
     private Piece makeMove(Position source, Position target) {
+        validateTargetPosition(source, target);
         Piece p = board.removePiece(source);
         Piece capturedPiece = board.removePiece(target);
         board.placePiece(p, target);
@@ -43,9 +44,15 @@ public class ChessMatch {
         if (!board.thereIsAPiece(position)) {
             throw new ChessException("There is no piece on source position");
         }
-        if(board.piece(position).isThereArryPossibleMove()) {
-            throw new ChessException("There is no possible moves for the chosen piece");
+        ChessPiece piece = (ChessPiece) board.piece(position);
+        if (!piece.isThereArryPossibleMove()) {
+            throw new ChessException("There are no possible moves for the chosen piece");
+        }
+    }
 
+    private void validateTargetPosition(Position source, Position target) {
+        if (!board.piece(source).possibleMove(target)) {
+            throw new ChessException("The chosen piece can't move to target position");
         }
     }
 
@@ -72,7 +79,7 @@ public class ChessMatch {
         placeNewPiece('f', 1, new Bishop(board, Color.WHITE));
 
 
-        placeNewPiece('a', 7, new Pawn(board, Color.BLACK));
+
         placeNewPiece('b', 7, new Pawn(board, Color.BLACK));
         placeNewPiece('c', 7, new Pawn(board, Color.BLACK));
         placeNewPiece('d', 7, new Pawn(board, Color.BLACK));

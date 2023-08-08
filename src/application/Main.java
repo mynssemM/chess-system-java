@@ -23,6 +23,7 @@ public class Main {
             try {
                 UI.clearScreen();
                 UI.printBoard(chessMatch.getPieces());
+
                 System.out.println();
                 System.out.print("Source: ");
                 ChessPosition source = UI.readChessPosition(sc);
@@ -32,13 +33,16 @@ public class Main {
                 ChessPosition target = UI.readChessPosition(sc);
 
                 ChessPiece capturedPiece = chessMatch.performChessMove(source, target);
-            }
-            catch (ChessException | InputMismatchException e) {
+
+                // Printar a peça capturada (se houver)
+                if (capturedPiece != null) {
+                    System.out.println("Captured piece: " + capturedPiece);
+                }
+            } catch (ChessException | InputMismatchException e) {
                 System.out.println(e.getMessage());
                 sc.nextLine();
             }
         }
-
-
     }
+
 }
