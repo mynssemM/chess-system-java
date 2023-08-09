@@ -8,7 +8,9 @@ import chess.ChessPiece;
 import chess.ChessPosition;
 
 import javax.xml.transform.Source;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -19,10 +21,12 @@ public class Main {
 
         ChessMatch chessMatch = new ChessMatch();
 
+        List<ChessPiece> captured = new ArrayList<>();
+
         while (true) {
             try {
                 UI.clearScreen();
-                UI.printMatch(chessMatch);
+                UI.printMatch(chessMatch, captured);
 
                 System.out.println();
                 System.out.print("Source: ");
@@ -40,7 +44,7 @@ public class Main {
 
                 // Printar a peça capturada (se houver)
                 if (capturedPiece != null) {
-                    System.out.println("Captured piece: " + capturedPiece);
+                    captured.add(capturedPiece);
                 }
             } catch (ChessException | InputMismatchException e) {
                 System.out.println(e.getMessage());
