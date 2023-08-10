@@ -48,7 +48,6 @@ public class Main {
                 }
             } catch (ChessException | InputMismatchException e) {
                 System.out.println(e.getMessage());
-                sc.nextLine();
             }
         }
         UI.clearScreen();

@@ -98,7 +98,7 @@ public class UI {
         if (piece == null) {
             System.out.print("-" + ANSI_RESET);
         } else {
-            String colorCode = (piece.getColor() == Color.WHITE) ? ANSI_WHITE : ANSI_YELLOW;
+            String colorCode = (piece.getColor() == Color.WHITE) ? ANSI_WHITE : ANSI_RED;
             System.out.print(colorCode + piece + ANSI_RESET);
         }
         System.out.print(" ");
